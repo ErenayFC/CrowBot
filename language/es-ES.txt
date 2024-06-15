@@ -1,0 +1,8 @@
+[
+    {
+        "name": "ayuda",
+        "description": "Obtener ayuda para Crow",
+        "content": "En tu mensaje; \n escribe el estado del bot donde escribes `status`\n escribe el nombre del bot donde escribes `botname`",
+        "id": 1
+    }
+]

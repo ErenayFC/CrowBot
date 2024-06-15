@@ -1,0 +1,96 @@
+[
+  {
+    "name": "help",
+    "description": "Get help for Crow",
+    "content": "In your message; \n writes the status of the bot where you write `status`\n writes the name of the bot where you write `botname`.",
+    "firstOptions": {},
+    "secondOptions": {},
+    "thirdOptions": {},
+    "id": 1
+  },
+  {
+    "name": "stats",
+    "description": "You look at statistics about Crow",
+    "content": {
+      "title": "Crow Stats",
+      "serverCount": "Server Count",
+      "userCount": "User Count",
+      "botPing": "Bot Ping",
+      "cpuUsage": "CPU Usage",
+      "ramUsage": "RAM Usage",
+      "botVersion": "Bot Version",
+      "nodejsVersion": "Node.js Version",
+      "shardCount": "Shard Count",
+      "footer": "Statistics updated in real time."
+    },
+    "firstOptions": {},
+    "secondOptions": {},
+    "thirdOptions": {},
+    "id": 2
+  },
+  {
+    "name": "eval",
+    "description": "[Admin] Execute a command",
+    "content": {
+      "fail": "Only [developer](https://discord.com/users/1029431477219360869) can use this command."
+    },
+    "firstOptions": {
+      "name": "code",
+      "description": "[Admin] Execute a command"
+    },
+    "secondOptions": {},
+    "thirdOptions": {},
+    "id": 3
+  },
+  {
+    "name": "draw",
+    "description": "Draw a picture",
+    "content": {},
+    "firstOptions": {
+      "name": "request",
+      "description": "Enter the subject of the image"
+    },
+    "secondOptions": {},
+    "thirdOptions": {},
+    "id": 4
+  },
+  {
+    "name": "chat",
+    "description": "Chat with Crow",
+    "content": {},
+    "firstOptions": {
+      "name": "text",
+      "description": "What should we do with Crow today?"
+    },
+    "secondOptions": {},
+    "thirdOptions": {},
+    "id": 5
+  },
+  {
+    "name": "pixel-art",
+    "description": "Draw a pixel art image",
+    "content": {},
+    "firstOptions": {
+      "name": "request",
+      "description": "Enter the subject of the image"
+    },
+    "secondOptions": {},
+    "thirdOptions": {},
+    "id": 6
+  },
+  {
+    "name": "anime",
+    "description": "You display a random anime image",
+    "content": {
+      "image": "Image:",
+      "isNotNSFWChannel": "This channel is not a NSFW channel. Please open NSFW option in channel options and try again later."
+    },
+    "firstOptions": {
+      "name": "nsfw",
+      "description": "Are you want NSFW image?"
+    },
+    "secondOptions": {},
+    "thirdOptions": {},
+    "id": 7
+  }
+]
