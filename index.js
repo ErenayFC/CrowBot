@@ -156,11 +156,11 @@ client.once("ready", () => {
     require("./dashboard/index")(client);
     const checkWatch = require("./handlers/watchbot/watchBots.js");
     let botlar = (await db.fetch("botlar")) || [];
-    if (!botlar.length < 1) {
-      setInterval(async () => {
+    setInterval(async () => {
+      if (botlar.length > 0) {
         botlar = await db.fetch("botlar");
         await checkWatch(botlar, client);
-      }, 5 * 1000);
-    }
+      }
+    }, 5 * 1000);
   })();
 });

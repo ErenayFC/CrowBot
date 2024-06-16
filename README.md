@@ -13,7 +13,7 @@
 
 ### Kendi botunuzu yaparken faydalanırsınız. Eğer yazılımda yeni iseniz kafanız basmayabilir
 
-### Lisans olduğu için kendi botunuz diye yayımlayamaz/paylaşamazsınız/kullandırtamazsınız
+### Lisans olduğu için kendi botunuz diye yayımlayamaz/paylaşamazsınız/kullandırtamazsınız. CC BY-NC-SA 4.0 lisansı ile korunmaktadır
 
 ### Yalnızca faydalanmak amacı ile kullanın
 

@@ -25,6 +25,7 @@ module.exports = async (botlar, client) => {
       const guild = await client.guilds.fetch(channel.guildId);
       const member = await guild.members.fetch(bot.id);
       const presence = member.presence;
+
       let statusmsg = `**Aktif**`;
       if (!presence) return;
       if (presence && presence.status && presence.status === "offline")
