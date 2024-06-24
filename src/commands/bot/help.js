@@ -15,6 +15,23 @@ module.exports = {
      * @param {import('discord.js').ChatInputCommandInteraction} interaction
      */
     const content = await translation(interaction.locale, 1);
-    interaction.reply({ content: content });
+    const embed = new EmbedBuilder()
+    .setTitle(content.title)
+    .setDescription(`
+      - </watchbot:${client.user.id}> : ${content.watchbot}
+       - ${content.watchbotHelp}
+      - </pastebin:${client.user.id} : ${content.pastebin}
+      `)
+      .setColor('Gold')
+      .setAuthor({
+        name: interaction.user.username,
+        iconURL: interaction.user.avatarURL(),
+      })
+      .setFooter({
+        text: client.user.username,
+        iconURL: client.user.avatarURL(),
+      })
+      .setTimestamp()
+    interaction.reply({ embed: [embed] });
   },
 };
