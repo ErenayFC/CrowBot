@@ -16,11 +16,11 @@ module.exports = {
      */
     const content = await translation(interaction.locale, 1);
     const embed = new EmbedBuilder()
-    .setTitle(content.title)
-    .setDescription(`
-      - </watchbot:${client.user.id}> : ${content.watchbot}
+      .setTitle("Crow")
+      .setDescription(`
+      - \`/watchbot\` : ${content.watchbot}
        - ${content.watchbotHelp}
-      - </pastebin:${client.user.id} : ${content.pastebin}
+      - \`/pastebin\` : ${content.pastebin}
       `)
       .setColor('Gold')
       .setAuthor({
@@ -32,6 +32,7 @@ module.exports = {
         iconURL: client.user.avatarURL(),
       })
       .setTimestamp()
-    interaction.reply({ embed: [embed] });
+
+    interaction.reply({ embeds: [embed] });
   },
 };
