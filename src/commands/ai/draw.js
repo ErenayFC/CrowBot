@@ -37,9 +37,11 @@ module.exports = {
     ),
 
   run: async (client, interaction) => {
-    await interaction.reply(
+    await interaction.reply({
+      content:
       "<a:loading_v2:1074335978900160574> Resminiz oluşturuluyor..."
-    );
+    , ephemeral: true
+  });
 
     const firstPrompt = interaction.options.getString(
       translations.firstOptionNames["en-US"]
@@ -157,13 +159,12 @@ module.exports = {
           content: "",
         });
       });
-
+      
       collector.on("end", (collected) => {
         if (collected.size === 0) {
           message.edit({
             content: "Resim süresi doldu.",
-            ephemeral: true,
-            components: [],
+            components: []
           });
         }
       });

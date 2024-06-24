@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const translation = require("../../../handlers/translate/translation");
 const loadLanguage = require("../../../handlers/translate/loadLanguage");
 const translations = loadLanguage(1);
