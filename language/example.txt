@@ -1,0 +1,36 @@
+// yalnızca aşağıdaki linkte yazan dillerin kısaltmalarını yazabilirsiniz dosya ismine
+
+// https://discord.com/developers/docs/reference#locales
+
+module.exports = [
+  {
+    name: "isim",
+    description: "açıklama",
+    content: {}, // obje olmalıdır
+    firstOptions: {
+      name: "",
+      description: "",
+        choices: {
+        name: "",
+        description: ""
+        }
+    },
+    secondOptions: {
+      name: "",
+      description: "",
+        choices: {
+        name: "",
+        description: ""
+        }
+    },
+    thirdOptions: {
+      name: "",
+      description: "",
+        choices: {
+        name: "",
+        description: ""
+        }
+    },
+    id: 1
+  }
+]

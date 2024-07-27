@@ -1,0 +1,27 @@
+<%- include('header.ejs') %>
+
+<div class="main">
+  <div class="card-header bot-links rounded-lg">
+    <h1 class="text-center text-white">
+      Komutlar
+    </h1>
+  </div>
+    <div class="row">
+      <% commands.forEach(function (command) { %>
+      <div class="col-md-4">
+        <div class="card bot-links">
+          <div class="card-body">
+            <h5 class="card-title text-primary text-center">
+              <i>/</i><%- command.name_localizations ? command.name_localizations[language] : command.name %>
+            </h5>
+            <p class="card-text text-white text-center">
+              <%- command.name_localizations ? command.description_localizations[language] : command.description %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+</div>
+
+<%- include('footer.ejs') %>

@@ -1,0 +1,152 @@
+<%- include("header.ejs") %>
+<div class="main mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7 mt-5">
+      <h1 class="text-center">Bot Ekle</h1>
+      <form id="addBotForm">
+        <div class="form-group">
+          <label for="bot_id">Bot ID</label>
+          <input name="bot_id" type="number" id="bot_id" class="form-control" placeholder="1234567890123456789" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Mesaj</label>
+          <input name="message" type="text" minLength="8" maxlength="64" id="message" class="form-control" placeholder="botisim şuanda durum" required>
+        </div>
+        <div class="form-check">
+          <input name="webpush" type="checkbox" id="webpush" class="form-check-input">
+          <label for="webpush" class="form-check-label">Tarayıcı Bildirimi</label>
+        </div>
+        <div class="form-check">
+          <input name="email_notify" type="checkbox" id="email_notify" class="form-check-input">
+          <label for="email_notify" class="form-check-label">Email Bildirimi</label>
+        </div>
+        <div class="form-group" id="email_input" style="display:none;">
+          <label for="email">Email Adresi</label>
+          <input name="email" type="email" id="email" class="form-control" placeholder="example@example.com" autocomplete="email">
+        </div>
+        <div class="form-check">
+          <input name="discord_notify" type="checkbox" id="discord_notify" class="form-check-input">
+          <label for="discord_notify" class="form-check-label">Discord Bildirimi</label>
+        </div>
+        <div class="form-group" id="discord_channel_input" style="display:none;">
+          <label for="channel_id">Mesajın atılacağı kanal ID</label>
+          <input name="channel_id" type="number" id="channel_id" class="form-control" placeholder="1234567890123456789">
+        </div>
+        <div class="text-center mt-3">
+          <button type="submit" class="btn btn-success" id="ekleButton">Gönder!</button>
+        </div>
+      </form>
+    </div>
+    <% if (bots.length > 0) { %>
+    <div class="col-lg-7 mt-5">
+      <h1 class="text-center">Bot Sil</h1>
+      <form id="removeBotForm">
+        <div class="form-group">
+          <label for="botSil">Bir Bot Seçiniz</label>
+          <select class="form-control" id="botSil" name="bot" required>
+            <% bots.map(bot => { %>
+            <option value="<%= bot.id %>"><%= bot.username %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="text-center mt-3">
+          <button type="submit" class="btn btn-success" id="silButton">Gönder!</button>
+        </div>
+      </form>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<script>
+  async function registerPushNotification() {
+    if ("serviceWorker" in navigator) try {
+      const e = await navigator.serviceWorker.register("/sw.js");
+      console.log("Service Worker Registered");
+      let t = await e.pushManager.getSubscription();
+      if (!t) {
+        const i = urlBase64ToUint8Array("CONFIG.JS DOSYANIZDAKI PUBLIC VAPID KEY'INI BURAYA YAZIN");
+        t = await e.pushManager.subscribe({
+          userVisibleOnly: !0,
+          applicationServerKey: i
+        })
+      }
+      return console.log("Push Notification Subscription successful"), t
+    } catch (e) {
+      console.log("Service Worker registration failed: ", e)
+    }
+    return null
+  }
+
+  function urlBase64ToUint8Array(e) {
+    const t = (e + "=".repeat((4 - e.length % 4) % 4)).replace(/\-/g, "+").replace(/_/g, "/"),
+      i = window.atob(t),
+      n = new Uint8Array(i.length);
+    for (let e = 0; e < i.length; ++e) n[e] = i.charCodeAt(e);
+    return n
+  }
+  document.getElementById("email_notify").addEventListener("change", function() {
+    const e = document.getElementById("email_input");
+    this.checked ? e.style.display = "block" : e.style.display = "none"
+  }), document.getElementById("discord_notify").addEventListener("change", function() {
+    const e = document.getElementById("discord_channel_input");
+    this.checked ? e.style.display = "block" : e.style.display = "none"
+  }), document.getElementById("addBotForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const t = document.querySelectorAll(".form-check-input");
+    if (!Array.from(t).some(e => e.checked)) return void alert("Lütfen en az bir bildirim seçeneği seçin.");
+    const i = document.getElementById("bot_id").value,
+      n = document.getElementById("channel_id").value,
+      o = document.getElementById("message").value,
+      r = document.getElementById("webpush").checked,
+      a = document.getElementById("email_notify").checked,
+      c = document.getElementById("email").value,
+      l = document.getElementById("discord_notify").checked;
+    if (l && !n || a && !c) return void alert("Discord bildirimi için kanal ID gerekli. Email bildirimi için email gerekli.");
+    let s = null;
+    r && (s = await registerPushNotification());
+    const d = {
+        bot_id: i,
+        channel_id: n,
+        message: o,
+        webpush: r,
+        email_notify: a,
+        email: c,
+        discord_notify: l,
+        webpushSubscription: s
+      },
+      u = await fetch("/api/watchbot/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${document.cookie.split("=")[1]}`
+        },
+        body: JSON.stringify(d)
+      }),
+      m = await u.json();
+    u.ok ? alert(m.success) : alert(m.error), setTimeout(() => {
+      window.location.reload()
+    }, 3e3)
+  });
+  <% if (bots.length > 0) { %>document.getElementById("removeBotForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const t = document.getElementById("botSil").value,
+      o = await fetch("/api/watchbot/remove", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${document.cookie.split("=")[1]}`
+        },
+        body: JSON.stringify({
+          bot_id: t
+        })
+      }),
+      a = await o.json();
+    o.ok ? alert(a.success) : alert(a.error), setTimeout(() => {
+      window.location.reload()
+    }, 3e3)
+  });
+  <% } %>
+</script>
+
+<%- include("footer.ejs") %>

@@ -1,0 +1,43 @@
+<footer class="fdb-block footer-large">
+  <div class="main">
+    <div class="row align-items-top text-center">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-sm-left">
+        <h3><strong>Ana Menü</strong></h3>
+        <nav class="nav flex-column">
+          <a class="nav-link active" href="/">Anasayfa</a>
+          <% if(user) { %>
+          <a class="nav-link" href="/dashboard">Yönetim Paneli</a>
+          <% } %>
+        </nav>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-5 mt-sm-0 text-sm-left">
+        <h3><strong>Yardım ve Bilgi</strong></h3>
+        <nav class="nav flex-column">
+          <a class="nav-link" href="mailto:api@crowbot.com.tr?subject=Yard%C4%B1m&body=Merhaba%20size%20bir%20sorum%20olacakt%C4%B1%0D%0A...%0D%0A%0D%0ASayg%C4%B1larımla [İsminiz]">Bizimle iletişime geç</a>
+        </nav>
+      </div>
+
+      <div class="col-12 col-md-4 col-lg-3 text-md-left mt-5 mt-md-0">
+        <h3><strong>Hakkımızda</strong></h3>
+        <p>Bu internet sitesi <a href="https://discord.com/users/1029431477219360869">Erenay</a> tarafından tasarlanmış ve yazılmıştır.</p>
+      </div>
+
+      <div class="col-12 col-lg-2 ml-auto text-lg-left mt-4 mt-lg-0 text-center">
+        <h3><strong>Bizi Takip Et</strong></h3>
+        <p class="lead">
+          <a href="/discord" class="mx-2" target="_blank"><i class="fab fa-discord" aria-hidden="true"></i></a>
+        </p>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col text-center">
+        © 2020-2024 Crow. Tüm hakları saklıdır
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>
