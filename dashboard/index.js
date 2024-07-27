@@ -20,7 +20,7 @@ module.exports = async (client) => {
   app.set('views', path.join(__dirname, '/views'));
   app.use(express.static(path.join(__dirname, '/public')));
   app.use(session({
-    secret: "knk burayı rastgele random at. hiçbişe farketmez",
+    secret: config.CLIENT_SECRET,
     resave: false,
     saveUninitialized: false,
   }));
